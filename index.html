@@ -41,7 +41,8 @@
                 <li class="lang-item">
                     <button id="lang-toggle" class="lang-switch-btn">🌐</button>
                 </li>
-                <li><a href="#contact" class="btn-nav" data-i18n="nav-contact">تواصل معنا</a></li>
+                <li><a href="#contact" data-i18n="nav-contact">تواصل معنا</a></li>
+                <li><a id="nav-auth-btn" href="login.html" class="btn-nav btn-nav-account">👤 حسابي</a></li>
             </ul>
         </nav>
     </header>
@@ -382,5 +383,21 @@
 
 
     <script src="script.js"></script>
+    <script>
+        // تحديث زرار الـ navbar حسب حالة تسجيل الدخول
+        (function() {
+            const token = localStorage.getItem('auth_token');
+            const name  = localStorage.getItem('auth_name');
+            const btn   = document.getElementById('nav-auth-btn');
+            if (!btn) return;
+            if (token && name) {
+                btn.textContent = '👤 ' + name;
+                btn.href = 'dashboard.html';
+            } else {
+                btn.textContent = '👤 تسجيل الدخول';
+                btn.href = 'login.html';
+            }
+        })();
+    </script>
 </body>
 </html>
