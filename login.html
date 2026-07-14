@@ -1,1 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Cairo', sans-serif; }</style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+
+  <div class="bg-white rounded-3xl shadow-xl w-full max-w-sm p-8">
+
+    <!-- Tabs: تسجيل دخول / إنشاء حساب -->
+    <div class="flex bg-gray-100 rounded-xl p-1 mb-6">
+      <button id="tab-login" onclick="showTab('login')"
+        class="flex-1 py-2 rounded-lg text-sm font-bold transition-all bg-white shadow text-teal-600">
+        تسجيل الدخول
+      </button>
+      <button id="tab-register" onclick="showTab('register')"
+        class="flex-1 py-2 rounded-lg text-sm font-bold transition-all text-gray-500">
+        إنشاء حساب
+      </button>
+    </div>
+
+    <!-- فورم تسجيل الدخول -->
+    <div id="form-login">
+      <h2 class="text-xl font-bold text-gray-800 mb-5 text-center">أهلاً بك 👋</h2>
+      <div class="space-y-4">
+        <input id="login-email" type="email" placeholder="البريد الإلكتروني"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+        <input id="login-password" type="password" placeholder="كلمة المرور"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+        <p id="login-error" class="text-red-500 text-xs text-center hidden"></p>
+        <button onclick="handleLogin()"
+          class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-bold transition-all">
+          دخول
+        </button>
+      </div>
+    </div>
+
+    <!-- فورم إنشاء حساب -->
+    <div id="form-register" class="hidden">
+      <h2 class="text-xl font-bold text-gray-800 mb-5 text-center">إنشاء حساب جديد</h2>
+      <div class="space-y-4">
+        <input id="reg-name" type="text" placeholder="الاسم الكامل"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+        <input id="reg-email" type="email" placeholder="البريد الإلكتروني"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+        <input id="reg-password" type="password" placeholder="كلمة المرور (6 أحرف على الأقل)"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+        <p id="reg-error" class="text-red-500 text-xs text-center hidden"></p>
+        <p id="reg-success" class="text-teal-600 text-xs text-center hidden">✅ تم التسجيل! سجل دخولك دلوقتي.</p>
+        <button onclick="handleRegister()"
+          class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-bold transition-all">
+          إنشاء الحساب
+        </button>
+      </div>
+    </div>
+
+    <p class="text-center text-xs text-gray-400 mt-5">
+      <a href="index.html" class="text-teal-500 hover:underline">← العودة للصفحة الرئيسية</a>
+    </p>
+  </div>
+
+  <script>
+    // لو المستخدم مسجل دخوله خلاص، روحه للداشبورد
+    if (localStorage.getItem('auth_token')) {
+      window.location.href = 'dashboard.html';
+    }
+
+    function showTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('form-login').classList.toggle('hidden', !isLogin);
+      document.getElementById('form-register').classList.toggle('hidden', isLogin);
+      document.getElementById('tab-login').className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${isLogin ? 'bg-white shadow text-teal-600' : 'text-gray-500'}`;
+      document.getElementById('tab-register').className = `flex-1 py-2 rounded-lg text-sm font-bold transition-all ${!isLogin ? 'bg-white shadow text-teal-600' : 'text-gray-500'}`;
+    }
+
+    async function handleLogin() {
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const errorEl = document.getElementById('login-error');
+      errorEl.classList.add('hidden');
+
+      if (!email || !password) {
+        errorEl.textContent = 'الإيميل وكلمة المرور مطلوبين';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/auth-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          localStorage.setItem('auth_token', data.token);
+          localStorage.setItem('auth_name', data.name);
+          localStorage.setItem('auth_email', data.email);
+          window.location.href = 'dashboard.html';
+        } else {
+          errorEl.textContent = data.error || 'حدث خطأ، حاول تاني';
+          errorEl.classList.remove('hidden');
+        }
+      } catch {
+        errorEl.textContent = 'فيه مشكلة في الاتصال، حاول تاني';
+        errorEl.classList.remove('hidden');
+      }
+    }
+
+    async function handleRegister() {
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const errorEl = document.getElementById('reg-error');
+      const successEl = document.getElementById('reg-success');
+      errorEl.classList.add('hidden');
+      successEl.classList.add('hidden');
+
+      if (!name || !email || !password) {
+        errorEl.textContent = 'كل الحقول مطلوبة';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/auth-register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          successEl.classList.remove('hidden');
+          setTimeout(() => showTab('login'), 1500);
+        } else {
+          errorEl.textContent = data.error || 'حدث خطأ، حاول تاني';
+          errorEl.classList.remove('hidden');
+        }
+      } catch {
+        errorEl.textContent = 'فيه مشكلة في الاتصال، حاول تاني';
+        errorEl.classList.remove('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
 
