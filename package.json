@@ -1,1 +1,9 @@
+{
+  "name": "academy-payment-system",
+  "version": "1.0.0",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3"
+  }
+}
 
