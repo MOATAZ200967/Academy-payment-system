@@ -113,17 +113,36 @@
       }
     }
 
+    function togglePass(inputId, eyeId) {
+      const input = document.getElementById(inputId);
+      const eye   = document.getElementById(eyeId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        eye.textContent = '🙈';
+      } else {
+        input.type = 'password';
+        eye.textContent = '👁️';
+      }
+    }
+
     async function handleRegister() {
-      const name = document.getElementById('reg-name').value.trim();
-      const email = document.getElementById('reg-email').value.trim();
-      const password = document.getElementById('reg-password').value;
-      const errorEl = document.getElementById('reg-error');
+      const name      = document.getElementById('reg-name').value.trim();
+      const email     = document.getElementById('reg-email').value.trim();
+      const password  = document.getElementById('reg-password').value;
+      const password2 = document.getElementById('reg-password2').value;
+      const errorEl   = document.getElementById('reg-error');
       const successEl = document.getElementById('reg-success');
       errorEl.classList.add('hidden');
       successEl.classList.add('hidden');
 
-      if (!name || !email || !password) {
+      if (!name || !email || !password || !password2) {
         errorEl.textContent = 'كل الحقول مطلوبة';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      if (password !== password2) {
+        errorEl.textContent = 'كلمتا المرور غير متطابقتين';
         errorEl.classList.remove('hidden');
         return;
       }
@@ -151,4 +170,3 @@
   </script>
 </body>
 </html>
-
