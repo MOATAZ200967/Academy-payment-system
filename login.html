@@ -12,7 +12,6 @@
 
   <div class="bg-white rounded-3xl shadow-xl w-full max-w-sm p-8">
 
-    <!-- Tabs: تسجيل دخول / إنشاء حساب -->
     <div class="flex bg-gray-100 rounded-xl p-1 mb-6">
       <button id="tab-login" onclick="showTab('login')"
         class="flex-1 py-2 rounded-lg text-sm font-bold transition-all bg-white shadow text-teal-600">
@@ -24,14 +23,21 @@
       </button>
     </div>
 
-    <!-- فورم تسجيل الدخول -->
     <div id="form-login">
       <h2 class="text-xl font-bold text-gray-800 mb-5 text-center">أهلاً بك 👋</h2>
       <div class="space-y-4">
         <input id="login-email" type="email" placeholder="البريد الإلكتروني"
           class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
-        <input id="login-password" type="password" placeholder="كلمة المرور"
-          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+        
+        <div class="relative">
+          <input id="login-password" type="password" placeholder="كلمة المرور"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+          <span id="login-eye" onclick="togglePass('login-password', 'login-eye')"
+            class="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 text-lg select-none">
+            👁️
+          </span>
+        </div>
+
         <p id="login-error" class="text-red-500 text-xs text-center hidden"></p>
         <button onclick="handleLogin()"
           class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-bold transition-all">
@@ -40,7 +46,6 @@
       </div>
     </div>
 
-    <!-- فورم إنشاء حساب -->
     <div id="form-register" class="hidden">
       <h2 class="text-xl font-bold text-gray-800 mb-5 text-center">إنشاء حساب جديد</h2>
       <div class="space-y-4">
@@ -48,8 +53,25 @@
           class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
         <input id="reg-email" type="email" placeholder="البريد الإلكتروني"
           class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
-        <input id="reg-password" type="password" placeholder="كلمة المرور (6 أحرف على الأقل)"
-          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+        
+        <div class="relative">
+          <input id="reg-password" type="password" placeholder="كلمة المرور (6 أحرف على الأقل)"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+          <span id="reg-eye1" onclick="togglePass('reg-password', 'reg-eye1')"
+            class="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 text-lg select-none">
+            👁️
+          </span>
+        </div>
+
+        <div class="relative">
+          <input id="reg-password2" type="password" placeholder="تأكيد كلمة المرور"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+          <span id="reg-eye2" onclick="togglePass('reg-password2', 'reg-eye2')"
+            class="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 text-lg select-none">
+            👁️
+          </span>
+        </div>
+
         <p id="reg-error" class="text-red-500 text-xs text-center hidden"></p>
         <p id="reg-success" class="text-teal-600 text-xs text-center hidden">✅ تم التسجيل! سجل دخولك دلوقتي.</p>
         <button onclick="handleRegister()"
@@ -113,6 +135,7 @@
       }
     }
 
+    // دالة العين لإظهار/إخفاء الباسورد
     function togglePass(inputId, eyeId) {
       const input = document.getElementById(inputId);
       const eye   = document.getElementById(eyeId);
