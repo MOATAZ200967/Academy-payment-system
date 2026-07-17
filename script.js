@@ -129,6 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "td-r7-v5": "6000 جنيه (سنة - خصم 40%)",
             "faq-title": "الأسئلة الشائعة (FAQ)",
             "contact-title": "تواصل معنا"
+            // داخل قسم ar:
+            "nav-auth-login": "👤 تسجيل الدخول",
         },
         en: {
             "nav-home": "Home",
@@ -256,6 +258,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "td-r7-v5": "6000 EGP (Year - 40% off)",
             "faq-title": "Frequently Asked Questions (FAQ)",
             "contact-title": "Contact Us"
+    // داخل قسم en:
+            "nav-auth-login": "👤 Login",
         }
     };
 
