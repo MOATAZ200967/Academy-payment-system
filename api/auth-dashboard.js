@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     const subRes = await fetch(process.env.GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'get_subscription', email: decoded.email })
+      body: JSON.stringify({ action: 'get_subscription', email: decoded.email, secret: process.env.GOOGLE_SCRIPT_SECRET })
     });
     const subData = await subRes.json();
 
