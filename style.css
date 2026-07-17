@@ -1,7 +1,6 @@
 /* =====================================================
-   🎨 CSS المُحسّن والمتجاوب بالكامل
+   🎨 المتغيرات الأساسية والألوان
    ===================================================== */
-
 :root {
     --primary-color: aqua;   
     --primary-hover: #00cccc;
@@ -38,9 +37,8 @@ a {
 }
 
 /* =====================================================
-   🧭 HEADER & NAVBAR (Responsive Design)
+   🧭 HEADER & NAVBAR (Desktop View)
    ===================================================== */
-
 header {
     background-color: rgba(30, 30, 30, 0.95);
     position: fixed;
@@ -56,10 +54,10 @@ header {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
+    height: 80px;
     position: relative;
 }
 
@@ -73,66 +71,15 @@ header {
 }
 
 /* =====================================================
-   🍔 HAMBURGER MENU (Mobile Toggle)
+   🔗 NAV LINKS (Desktop Mode)
    ===================================================== */
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    cursor: pointer;
-    padding: 8px;
-    gap: 5px;
-    transition: all 0.3s ease;
-    z-index: 1001;
-    flex-shrink: 0;
-}
-
-.hamburger:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
-}
-
-.hamburger .bar {
-    display: block;
-    width: 22px;
-    height: 2.5px;
-    background-color: var(--text-main);
-    border-radius: 2px;
-    transition: all 0.3s ease-in-out;
-    transform-origin: center;
-}
-
-/* Animation when menu is open */
-.hamburger.active .bar:nth-child(1) {
-    transform: translateY(7.5px) rotate(45deg);
-}
-
-.hamburger.active .bar:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-}
-
-.hamburger.active .bar:nth-child(3) {
-    transform: translateY(-7.5px) rotate(-45deg);
-}
-
-/* =====================================================
-   🔗 NAV LINKS (Desktop & Mobile)
-   ===================================================== */
-
 .nav-links {
     display: flex;
     list-style: none;
     gap: 20px;
     align-items: center;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links a {
@@ -181,40 +128,138 @@ header {
 }
 
 /* =====================================================
-   📱 MOBILE RESPONSIVE (max-width: 768px)
+   📱 عناصر التحكم للموبايل والتابلت (مخفية في الديسكتوب)
    ===================================================== */
+.mobile-controls {
+    display: none;
+    align-items: center;
+    gap: 15px;
+    z-index: 1002;
+}
 
-@media (max-width: 768px) {
-    .hamburger {
+.mobile-lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 22px;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.mobile-lang-btn:hover {
+    color: var(--primary-color);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+    gap: 5px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.hamburger:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.hamburger .bar {
+    display: block;
+    width: 22px;
+    height: 2.5px;
+    background-color: var(--text-main);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* حركة الـ Hamburger لما يفتح المنيو */
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+    background-color: var(--primary-color);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+    background-color: var(--primary-color);
+}
+
+/* غطاء الخلفية الشفاف */
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 998;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.nav-overlay.active {
+    display: block;
+}
+
+/* =====================================================
+   💻 شاشات التابلت والموبايل (max-width: 1024px)
+   ===================================================== */
+@media (max-width: 1024px) {
+    .hamburger, .mobile-controls {
         display: flex;
     }
 
     .nav-container {
         padding: 12px 15px;
-        flex-wrap: nowrap;
     }
 
+    /* تحويل الروابط لقائمة جانبية (Drawer) */
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%;
         width: 280px;
         height: 100vh;
         background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
-        padding: 80px 25px 30px 25px;
+        padding: 100px 24px 40px 24px;
         gap: 0;
         z-index: 999;
-        border-left: 2px solid var(--primary-color);
-        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
         overflow-y: auto;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1), left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* When menu is open */
+    /* الحالة الافتراضية للـ Drawer (RTL - عربي) */
+    .nav-links {
+        right: -300px;
+        left: auto;
+        border-left: 2px solid var(--primary-color);
+    }
+
     .nav-links.active {
         right: 0;
+    }
+
+    /* إخفاء زر لغة الديسكتوب الأساسي جوة الـ Drawer */
+    .nav-links .lang-item {
+        display: none !important;
     }
 
     .nav-links li {
@@ -228,46 +273,33 @@ header {
 
     .nav-links a {
         display: block;
-        padding: 15px 0;
+        padding: 15px 12px;
         font-size: 16px;
         width: 100%;
+        text-align: start;
+        border-radius: 6px;
+        transition: background 0.2s ease;
     }
 
-    .nav-links .btn-nav {
-        margin: 10px 0;
+    .nav-links a:hover {
+        background-color: rgba(0, 255, 255, 0.05);
+    }
+
+    /* زر الحساب داخل الدروير */
+    .nav-links .btn-nav-account {
+        margin: 15px 0;
         text-align: center;
         padding: 12px 18px;
     }
+}
 
-    .lang-item {
-        padding: 10px 0;
-    }
-
-    .lang-switch-btn {
-        width: 100%;
-        padding: 10px;
-    }
-
-    /* Overlay when menu is open */
-    .nav-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 998;
-        backdrop-filter: blur(3px);
-    }
-
-    .nav-overlay.active {
-        display: block;
-    }
-
-    /* Hero section adjustment */
+/* =====================================================
+   📱 الموبايل العادي (max-width: 768px)
+   ===================================================== */
+@media (max-width: 768px) {
+    /* تعديلات الهيرو والسكشن للموبايل */
     .hero {
-        margin-top: 60px;
+        margin-top: 80px;
     }
 
     .hero-content h1 {
@@ -308,9 +340,8 @@ header {
 }
 
 /* =====================================================
-   📱 SMALL MOBILE (max-width: 480px)
+   📱 شاشات الموبايل الصغيرة جداً (max-width: 480px)
    ===================================================== */
-
 @media (max-width: 480px) {
     .nav-links {
         width: 100%;
@@ -351,42 +382,8 @@ header {
 }
 
 /* =====================================================
-   💻 TABLET (max-width: 1024px)
+   🎯 HERO SECTION & CARDS & SECTIONS
    ===================================================== */
-
-@media (max-width: 1024px) and (min-width: 769px) {
-    .nav-links {
-        gap: 12px;
-    }
-
-    .nav-links a {
-        font-size: 14px;
-    }
-
-    .btn-nav {
-        padding: 6px 14px;
-        font-size: 14px;
-    }
-
-    .nav-container {
-        padding: 12px 15px;
-    }
-}
-
-/* =====================================================
-   🖥️ DESKTOP (min-width: 1200px)
-   ===================================================== */
-
-@media (min-width: 1200px) {
-    .nav-container {
-        padding: 15px 30px;
-    }
-}
-
-/* =====================================================
-   🎯 HERO SECTION
-   ===================================================== */
-
 .hero {
     height: 100vh;
     display: flex;
@@ -394,7 +391,7 @@ header {
     justify-content: center;
     text-align: center;
     padding: 0 20px;
-    margin-top: 60px;
+    margin-top: 80px;
     background: linear-gradient(rgba(18, 18, 18, 0.4), rgba(18, 18, 18, 0.7));
 }
 
@@ -435,10 +432,6 @@ header {
     background-color: var(--primary-hover);
     box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
 }
-
-/* =====================================================
-   📦 SECTIONS & CARDS
-   ===================================================== */
 
 .section-container {
     max-width: 1200px;
@@ -586,7 +579,6 @@ header {
 /* =====================================================
    📊 TABLE
    ===================================================== */
-
 .table-responsive {
     overflow-x: auto;
     margin-top: 20px;
@@ -641,9 +633,8 @@ header {
 .compare-table td .no { color: #f44336; font-weight: bold; font-size: 20px; }
 
 /* =====================================================
-   🎠 SLIDERS
+   🎠 SLIDERS & CAROUSELS
    ===================================================== */
-
 .slider-wrapper {
     position: relative;
     max-width: 600px;
@@ -752,9 +743,8 @@ header {
 }
 
 /* =====================================================
-   📱 SOCIAL SECTION
+   📱 SOCIAL SECTION & FOOTER
    ===================================================== */
-
 .social-section {
     padding: 60px 20px;
     text-align: center;
@@ -807,10 +797,6 @@ header {
 .social-icon-box.instagram:hover { color: #E1306C; border-color: #E1306C; background: rgba(225, 48, 108, 0.05); }
 .social-icon-box.email:hover { color: var(--primary-color); border-color: var(--primary-color); background: rgba(0, 255, 255, 0.05); }
 
-/* =====================================================
-   🦶 FOOTER
-   ===================================================== */
-
 footer {
     background-color: #0a0a0a;
     padding: 30px 20px;
@@ -862,7 +848,6 @@ footer {
 /* =====================================================
    ❓ FAQ ACCORDION
    ===================================================== */
-
 .faq-container {
     max-width: 900px;
     margin: 0 auto;
@@ -942,11 +927,10 @@ footer {
 }
 
 .faq-item.active .faq-answer {
-    max-height: 1000px; /* تم زيادته لمنع قص النص في الشاشات الصغيرة */
+    max-height: 300px; 
     padding: 20px;
     border-top: 1px solid var(--border-color);
 }
-
 
 .faq-item.active .faq-icon {
     transform: rotate(45deg); 
@@ -954,9 +938,8 @@ footer {
 }
 
 /* =====================================================
-   🌐 LTR DIRECTION (English Mode)
+   🌐 اتجاه الـ LTR (اللغة الإنجليزية)
    ===================================================== */
-
 [dir="ltr"] .nav-container {
     flex-direction: row;
 }
@@ -987,11 +970,11 @@ footer {
 [dir="ltr"] .prev { right: auto; left: 10px; }
 [dir="ltr"] .next { left: auto; right: 10px; }
 
-/* Mobile LTR adjustments */
-@media (max-width: 768px) {
+/* تبديل مكان واتجاه فتح الـ Drawer في الإنجليزي للموبايل والتابلت */
+@media (max-width: 1024px) {
     [dir="ltr"] .nav-links {
         right: auto;
-        left: -100%;
+        left: -300px;
         border-left: none;
         border-right: 2px solid var(--primary-color);
     }
@@ -1002,7 +985,7 @@ footer {
 }
 
 /* =====================================================
-   📋 CUSTOM DATA MODAL (Fully Responsive)
+   📋 نافذة إدخال البيانات - MODAL (Fully Responsive)
    ===================================================== */
 .modal-overlay {
     position: fixed;
