@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const userRes = await fetch(process.env.GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'get_user', email })
+      body: JSON.stringify({ action: 'get_user', email, secret: process.env.GOOGLE_SCRIPT_SECRET })
     });
     const userData = await userRes.json();
 
@@ -48,4 +48,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ success: false, error: error.message });
   }
 }
-
