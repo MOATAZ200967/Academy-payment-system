@@ -1,10 +1,12 @@
 import bcrypt from 'bcryptjs';
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ success: false, error: 'Method not allowed' });
+  }
 
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body || {};
 
     if (!name || !email || !password) {
       return res.status(400).json({ success: false, error: 'كل الحقول مطلوبة' });
@@ -14,22 +16,32 @@ export default async function handler(req, res) {
       return res.status(400).json({ success: false, error: 'كلمة المرور لازم تكون 6 أحرف على الأقل' });
     }
 
-    // جيب بيانات المستخدمين الحاليين من الشيت
+    if (!process.env.GOOGLE_SCRIPT_URL || !process.env.GOOGLE_SCRIPT_SECRET) {
+      return res.status(500).json({ success: false, error: 'إعدادات السيرفر غير مكتملة' });
+    }
+
     const checkRes = await fetch(process.env.GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'check_user', email, secret: process.env.GOOGLE_SCRIPT_SECRET })
+      body: JSON.stringify({
+        action: 'check_user',
+        email,
+        secret: process.env.GOOGLE_SCRIPT_SECRET
+      })
     });
+
+    if (!checkRes.ok) {
+      return res.status(500).json({ success: false, error: 'تعذر التحقق من المستخدم' });
+    }
+
     const checkData = await checkRes.json();
 
-    if (checkData.exists) {
+    if (checkData?.exists) {
       return res.status(409).json({ success: false, error: 'الإيميل ده مسجل قبل كده' });
     }
 
-    // تشفير الباسورد
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // تسجيل المستخدم الجديد في الشيت
     const registerRes = await fetch(process.env.GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -41,16 +53,20 @@ export default async function handler(req, res) {
         secret: process.env.GOOGLE_SCRIPT_SECRET
       })
     });
+
+    if (!registerRes.ok) {
+      return res.status(500).json({ success: false, error: 'تعذر تنفيذ التسجيل' });
+    }
+
     const registerData = await registerRes.json();
 
-    if (!registerData.success) {
-      return res.status(500).json({ success: false, error: 'فيه مشكلة في التسجيل، حاول تاني' });
+    if (!registerData?.success) {
+      return res.status(500).json({ success: false, error: registerData?.error || 'فيه مشكلة في التسجيل، حاول تاني' });
     }
 
     return res.status(200).json({ success: true, message: 'تم التسجيل بنجاح' });
-
   } catch (error) {
     console.error('Register Error:', error);
-    return res.status(500).json({ success: false, error: error.message });
+    return res.status(500).json({ success: false, error: 'حدث خطأ في التسجيل' });
   }
 }
