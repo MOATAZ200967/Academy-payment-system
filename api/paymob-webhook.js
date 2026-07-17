@@ -67,6 +67,29 @@ export default async function handler(req, res) {
             const orderId = order.merchant_order_id || order.id || 'غير معروف';
             const packageName = order.items?.[0]?.name || 'باقة تدريبية';
 
+            // ============================================================
+            // تسجيل الاشتراك في Google Sheet (عشان يظهر في الداشبورد)
+            // ============================================================
+            if (email) {
+                try {
+                    await fetch(process.env.GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            action: 'save_subscription',
+                            email,
+                            name,
+                            package_name: packageName,
+                            amount,
+                            order_id: orderId,
+                            secret: process.env.GOOGLE_SCRIPT_SECRET
+                        })
+                    });
+                } catch (sheetError) {
+                    console.error('Sheet Save Error:', sheetError);
+                }
+            }
+
             const tableHtml = `
                 <table dir="rtl" style="width:100%;border-collapse:collapse;font-family:Arial;">
                     <tr style="background:#0d9488;color:#fff;">
