@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+    
     // ==========================================
-    // 1. Translation Dictionary (Arabic & English)
+    // 1. القاموس اللغوي (Translations)
     // ==========================================
     const translations = {
         ar: {
@@ -139,142 +140,45 @@ document.addEventListener("DOMContentLoaded", () => {
             "nav-compare": "Course Comparison",
             "nav-faq": "FAQ",
             "nav-contact": "Contact Us",
-            "hero-title": "Speak English with Confidence, Open the World's Doors <br><span>Start Your Real Journey in Learning English!</span>",
-            "hero-desc": "100% customized online training for you. Not just a course and words... it's a flexible educational system that will get you to the strongest version of yourself in English in the fastest time and without difficulty.",
-            "hero-btn": "Book Your Spot & Start Now",
-            "about-title": "Who is the Teacher?",
-            "about-p1": "An internationally certified English teacher (CELTA/TEFL) with over 8 years of experience teaching English to students of different nationalities and levels. My goal is not just to give you words and sentences, but to teach you how to think in English and speak fluently and confidently. Over the past years, I have helped over [500+] students overcome the fear barrier and speak English confidently, whether for travel, study, or work. My system is based on scientific foundations and complete flexibility to fit your day and work.",
-            "about-p2": "Our goal is not just temporary lessons, our goal is for you to acquire a life skill, understand the language, and use it naturally to open new doors in your professional and personal life.",
-            "results-title": "Not Just Words... These are Our Students' Success Stories!",
-            "r1-title": "From Zero to Conversation in 3 Months",
-            "r1-desc": "A student started from scratch and was able to speak English confidently in work meetings.",
-            "r2-title": "IELTS Success with Score 7.5",
-            "r2-desc": "A student achieved a high score in IELTS after 4 months of intensive preparation.",
-            "r3-title": "Complete Career Level Change",
-            "r3-desc": "An employee got promoted after mastering English and being able to communicate with foreign clients.",
-            "r4-title": "Accepted into an International University",
-            "r4-desc": "A student achieved TOEFL 100+ and was able to apply for a scholarship at a British university.",
-            "r5-title": "Fluent Speaking During Travel",
-            "r5-desc": "A student was able to travel alone and handle all situations in English with complete confidence.",
-            "r6-title": "Strong Foundation for Children",
-            "r6-desc": "An 8-year-old child was able to speak English naturally and got an excellent grade at school.",
-            "r7-title": "Language Mastery for Freelancing",
-            "r7-desc": "A freelancer was able to attract international clients after significantly improving his English.",
-            "packages-title": "Choose Your Course",
-            "p1-sub": "(Foundation Course + Educational Resources)",
-            "p1-price": "Self-Paced",
-            "p1-f1": "Foundation lessons in grammar, vocabulary, and pronunciation",
-            "p1-f2": "High-quality recorded videos for every lesson",
-            "p1-f3": "Comprehensive e-book (Grammar - Vocabulary - Conversation)",
-            "p1-f4": "Interactive exercises and self-assessment tests",
-            "p1-f5": "Access to student community for discussion and practice",
-            "p1-f6": "Free content updates",
-            "p1-btn": "Subscribe Now",
-            "p2-sub": "(Personal Coaching for 1 Month)",
-            "p2-price": "1-Month Subscription",
-            "p2-f1": "4 live online sessions per week (16 sessions/month)",
-            "p2-f2": "Customized learning plan based on your level and goal",
-            "p2-f3": "Interactive error correction and pronunciation improvement",
-            "p2-f4": "Custom homework and exercises after each session",
-            "p2-f5": "Direct support and chat via WhatsApp with response within 24 hours",
-            "p2-btn": "Subscribe Now",
-            "p3-badge": "Most Popular",
-            "p3-sub": "(Personal Coaching for 3 Months)",
-            "p3-price": "3-Months Subscription",
-            "p3-f1": "4 live online sessions per week (48 sessions/3 months)",
-            "p3-f2": "Customized learning plan based on your level and goal",
-            "p3-f3": "Detailed monthly progress report with strengths and weaknesses",
-            "p3-f4": "Best for achieving real results and transformation in language level",
-            "p3-f5": "Priority support and fast replies on WhatsApp",
-            "p3-btn": "Subscribe & Save Now",
-            "p4-sub": "(Personal Coaching for 6 Months)",
-            "p4-price": "6-Months Subscription",
-            "p4-f1": "4 live online sessions per week (96 sessions/6 months)",
-            "p4-f2": "Comprehensive learning plan from beginner to advanced level",
-            "p4-f3": "Full preparation for IELTS or TOEFL exams",
-            "p4-f4": "Additional conversation sessions with native speakers",
-            "p4-f5": "Accredited completion certificate after each level",
-            "p4-f6": "Direct support on WhatsApp 24/7",
-            "p4-btn": "Subscribe Now",
-            "p5-badge": "Best Value Offer 🔥",
-            "p5-sub": "(Personal Coaching for 1 Full Year)",
-            "p5-price": "1-Year Subscription",
-            "p5-f1": "4 live online sessions per week (192 sessions/year)",
-            "p5-f2": "Complete journey from zero to mastery (A1 to C1)",
-            "p5-f3": "Professional preparation for IELTS and TOEFL exams",
-            "p5-f4": "Weekly conversation sessions with native speakers",
-            "p5-f5": "Internationally accredited certificates after each level",
-            "p5-f6": "Direct support on WhatsApp 24/7",
-            "p5-f7": "Exclusive 40% discount on total price",
-            "p5-btn": "Subscribe for the Whole Year & Save",
-            "compare-title": "Comprehensive Course Comparison",
-            "th-f": "Feature",
-            "th-p1": "English BASIC (1 Month)",
-            "th-p2": "English PLUS (3 Months)",
-            "th-p3": "English PRO (6 Months)",
-            "th-p4": "English MASTER (1 Year) 🔥",
-            "td-r1": "Program Type",
-            "td-r1-v1": "Recorded lessons + Educational resources",
-            "td-r1-v2": "Customized personal coaching",
-            "td-r1-v3": "Customized personal coaching",
-            "td-r1-v4": "Customized personal coaching",
-            "td-r1-v5": "Customized personal coaching",
-            "td-r2": "Live Online Sessions",
-            "td-r2-v1": "✗ (Recorded videos)",
-            "td-r2-v2": "✓ (16 sessions/month)",
-            "td-r2-v3": "✓ (48 sessions/3 months)",
-            "td-r2-v4": "✓ (96 sessions/6 months)",
-            "td-r2-v5": "✓ (192 sessions/year)",
-            "td-r3": "Plan Updates & Follow-up",
-            "td-r3-v1": "✗",
-            "td-r3-v2": "✓ (Weekly)",
-            "td-r3-v3": "✓ (Weekly)",
-            "td-r3-v4": "✓ (Weekly)",
-            "td-r3-v5": "✓ (Weekly + Monthly reports)",
-            "td-r4": "Pronunciation & Conversation Correction",
-            "td-r4-v1": "✗ (Ready videos)",
-            "td-r4-v2": "✓ (Live)",
-            "td-r4-v3": "✓ (Live)",
-            "td-r4-v4": "✓ (Live + Native speakers)",
-            "td-r4-v5": "✓ (Live + Weekly native speakers)",
-            "td-r5": "WhatsApp Support & Reply",
-            "td-r5-v1": "Student community",
-            "td-r5-v2": "Direct support (24 hours)",
-            "td-r5-v3": "Priority support",
-            "td-r5-v4": "24/7 support",
-            "td-r5-v5": "24/7 + Top priority",
-            "td-r6": "Progress Reports",
-            "td-r6-v1": "Self-assessment tests",
-            "td-r6-v2": "Continuous follow-up",
-            "td-r6-v3": "Monthly reports",
-            "td-r6-v4": "Detailed monthly reports",
-            "td-r6-v5": "Monthly reports + Development plan",
-            "td-r7": "Subscription Cost",
-            "td-r7-v1": "400 EGP (One-time)",
-            "td-r7-v2": "800 EGP/month",
-            "td-r7-v3": "2000 EGP (3 months)",
-            "td-r7-v4": "3500 EGP (6 months)",
-            "td-r7-v5": "6000 EGP (Year - 40% off)",
-            "faq-title": "Frequently Asked Questions (FAQ)",
-            "contact-title": "Contact Us",
-            "nav-auth-login": "👤 Login"
+            "hero-title": "Speak English with Confidence <br><span>Start Your Real Journey Now!</span>",
+            "hero-desc": "100% customized online training. A flexible system that reaches the strongest version of yourself in the fastest time.",
+            "hero-btn": "Book Your Spot Now",
+            "nav-auth-login": "👤 Login",
+            // ... (يمكنك إكمال باقي المفاتيح الإنجليزية هنا عند الحاجة)
         }
     };
 
     // ==========================================
-    // 2. Language Toggle
+    // 2. إدارة حالة تسجيل الدخول (Navbar Auth)
+    // ==========================================
+    function updateNavbarAuth() {
+        const token = localStorage.getItem('auth_token');
+        const name = localStorage.getItem('auth_name');
+        const authBtn = document.getElementById('nav-auth-btn');
+
+        if (authBtn) {
+            if (token && name) {
+                authBtn.textContent = `👤 ${name}`;
+                authBtn.href = 'dashboard.html';
+            } else {
+                authBtn.textContent = currentLang === 'ar' ? '👤 تسجيل الدخول' : '👤 Login';
+                authBtn.href = 'login.html';
+            }
+        }
+    }
+
+    // ==========================================
+    // 3. تغيير اللغة (Language Toggle)
     // ==========================================
     const langToggleBtn = document.getElementById("lang-toggle");
-    let currentLang = "ar";
+    const langToggleMobile = document.getElementById("lang-toggle-mobile");
+    let currentLang = localStorage.getItem('preferred_lang') || "ar";
 
     function setLanguage(lang) {
         currentLang = lang;
+        localStorage.setItem('preferred_lang', lang);
         document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
         document.documentElement.setAttribute("lang", lang);
-
-        if (langToggleBtn) {
-            langToggleBtn.textContent = "🌐";
-        }
 
         document.querySelectorAll("[data-i18n]").forEach(element => {
             const key = element.getAttribute("data-i18n");
@@ -282,299 +186,134 @@ document.addEventListener("DOMContentLoaded", () => {
                 element.innerHTML = translations[lang][key];
             }
         });
+        updateNavbarAuth();
     }
 
-    if (langToggleBtn) {
-        langToggleBtn.addEventListener("click", () => {
-            const nextLang = currentLang === "ar" ? "en" : "ar";
-            setLanguage(nextLang);
-        });
-    }
+    if (langToggleBtn) langToggleBtn.addEventListener("click", () => setLanguage(currentLang === "ar" ? "en" : "ar"));
+    if (langToggleMobile) langToggleMobile.addEventListener("click", () => setLanguage(currentLang === "ar" ? "en" : "ar"));
 
-    setLanguage("ar");
+    setLanguage(currentLang);
 
     // ==========================================
-    // 3. Hamburger Menu (Mobile Navigation)
+    // 4. القائمة الجانبية للموبايل (Mobile Menu)
     // ==========================================
     const hamburgerBtn = document.getElementById("hamburger-btn");
     const navLinks = document.getElementById("nav-links");
     const navOverlay = document.getElementById("nav-overlay");
 
     function toggleMenu() {
+        const isOpening = !navLinks.classList.contains("active");
         hamburgerBtn.classList.toggle("active");
         navLinks.classList.toggle("active");
         if (navOverlay) navOverlay.classList.toggle("active");
-
-        const isExpanded = hamburgerBtn.classList.contains("active");
-        hamburgerBtn.setAttribute("aria-expanded", isExpanded);
-        document.body.style.overflow = isExpanded ? "hidden" : "";
+        document.body.style.overflow = isOpening ? "hidden" : "";
     }
 
-    function closeMenu() {
-        hamburgerBtn.classList.remove("active");
-        navLinks.classList.remove("active");
-        if (navOverlay) navOverlay.classList.remove("active");
-        hamburgerBtn.setAttribute("aria-expanded", "false");
-        document.body.style.overflow = "";
-    }
-
-    if (hamburgerBtn && navLinks) {
-        hamburgerBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            toggleMenu();
-        });
-
-        if (navOverlay) {
-            navOverlay.addEventListener("click", closeMenu);
-        }
-
-        navLinks.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", closeMenu);
-        });
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && navLinks.classList.contains("active")) {
-                closeMenu();
-            }
-        });
-
-        document.addEventListener("click", (e) => {
-            if (navLinks.classList.contains("active") && 
-                !navLinks.contains(e.target) && 
-                !hamburgerBtn.contains(e.target)) {
-                closeMenu();
-            }
-        });
-    }
+    if (hamburgerBtn) hamburgerBtn.addEventListener("click", toggleMenu);
+    if (navOverlay) navOverlay.addEventListener("click", toggleMenu);
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", toggleMenu));
 
     // ==========================================
-    // 4. Auto-close mobile menu on resize
-    // ==========================================
-    let resizeTimer;
-    window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            if (window.innerWidth > 768 && navLinks.classList.contains("active")) {
-                closeMenu();
-            }
-        }, 250);
-    });
-
-    // ==========================================
-    // 5. Image Sliders
+    // 5. السلايدر (Sliders)
     // ==========================================
     function setupSlider(sliderId, slideClass, dotClass) {
-        const sliderWrapper = document.getElementById(sliderId);
-        if (!sliderWrapper) return;
+        const slider = document.getElementById(sliderId);
+        if (!slider) return;
 
-        const slides = sliderWrapper.querySelectorAll("." + slideClass);
-        const prevBtn = sliderWrapper.querySelector(".slider-btn.prev");
-        const nextBtn = sliderWrapper.querySelector(".slider-btn.next");
-        const dots = sliderWrapper.querySelectorAll("." + dotClass);
+        const slides = slider.querySelectorAll("." + slideClass);
+        const dots = slider.querySelectorAll("." + dotClass);
+        let index = 0;
 
-        let currentIndex = 0;
-
-        function updateSlider() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle("active", index === currentIndex);
-            });
-            dots.forEach((dot, index) => {
-                dot.classList.toggle("active", index === currentIndex);
-            });
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            index = (n + slides.length) % slides.length;
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
         }
 
-        if (nextBtn) {
-            nextBtn.addEventListener("click", () => {
-                currentIndex = (currentIndex + 1) % slides.length;
-                updateSlider();
-            });
-        }
+        slider.querySelector('.next')?.addEventListener('click', () => showSlide(index + 1));
+        slider.querySelector('.prev')?.addEventListener('click', () => showSlide(index - 1));
+        dots.forEach((d, i) => d.addEventListener('click', () => showSlide(i)));
 
-        if (prevBtn) {
-            prevBtn.addEventListener("click", () => {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                updateSlider();
-            });
-        }
-
-        dots.forEach((dot, index) => {
-            dot.addEventListener("click", () => {
-                currentIndex = index;
-                updateSlider();
-            });
-        });
-
-        // Auto-play every 5 seconds (تحديث آمن للشرائح)
-        if (slides.length > 0) {
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % slides.length;
-                updateSlider();
-            }, 5000);
-            updateSlider();
-        }
+        setInterval(() => showSlide(index + 1), 5000);
     }
 
     setupSlider("coach-slider", "coach-slide", "coach-dot");
     setupSlider("results-slider", "results-slide", "dot");
 
     // ==========================================
-    // 6. FAQ Accordion
+    // 6. الأسئلة الشائعة (FAQ)
     // ==========================================
-    const faqItems = document.querySelectorAll(".faq-item");
-    faqItems.forEach(item => {
-        const question = item.querySelector(".faq-question");
-        if (!question) return;
-
-        question.addEventListener("click", function() {
-            const isActive = item.classList.contains("active");
-
-            // Close all items
-            faqItems.forEach(i => {
-                i.classList.remove("active");
-                const icon = i.querySelector(".faq-icon");
-                if (icon) icon.textContent = "+";
-            });
-
-            // Open clicked item if it was closed
-            if (!isActive) {
-                item.classList.add("active");
-                const icon = item.querySelector(".faq-icon");
-                if (icon) icon.textContent = "−";
-            }
+    document.querySelectorAll(".faq-question").forEach(q => {
+        q.addEventListener("click", () => {
+            const item = q.parentElement;
+            const isOpen = item.classList.contains("active");
+            document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
+            if (!isOpen) item.classList.add("active");
         });
     });
 
     // ==========================================
-    // 7. EmailJS Initialization
+    // 7. منطق الدفع والمودال (Payment Modal)
     // ==========================================
-    if (typeof emailjs !== "undefined") {
-        emailjs.init("0_7B31AMGYicwz8oo");
-    }
-
-    // ==========================================
-    // 8. Payment Modal & Logic
-    // ==========================================
-    const payButtons = document.querySelectorAll(".pay-btn");
     const modal = document.getElementById("customModal");
-    let activePackage = null;
+    const confirmBtn = document.getElementById("confirmBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+    let selectedPackage = null;
 
-    if (payButtons.length > 0 && modal) {
-        payButtons.forEach(button => {
-            button.addEventListener("click", (e) => {
-                e.preventDefault();
-                activePackage = {
-                    button: button,
-                    amount: button.getAttribute("data-amount"),
-                    packageName: button.getAttribute("data-name"),
-                    originalText: button.innerHTML
-                };
-
-                // Clear fields
-                const nameInput = document.getElementById("modalNameInput");
-                const emailInput = document.getElementById("modalEmailInput");
-                const phoneInput = document.getElementById("modalPhoneInput");
-                if (nameInput) nameInput.value = "";
-                if (emailInput) emailInput.value = "";
-                if (phoneInput) phoneInput.value = "";
-
-                modal.style.display = "flex";
-            });
+    document.querySelectorAll(".pay-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            selectedPackage = {
+                amount: btn.getAttribute("data-amount"),
+                name: btn.getAttribute("data-name")
+            };
+            modal.style.display = "flex";
         });
+    });
 
-        const cancelBtn = document.getElementById("cancelBtn");
-        if (cancelBtn) {
-            cancelBtn.addEventListener("click", () => {
-                modal.style.display = "none";
-                activePackage = null;
-            });
-        }
+    if (cancelBtn) cancelBtn.addEventListener("click", () => modal.style.display = "none");
 
-        const confirmBtn = document.getElementById("confirmBtn");
-        if (confirmBtn) {
-            confirmBtn.addEventListener("click", async function() {
-                if (!activePackage) return;
+    if (confirmBtn) {
+        confirmBtn.addEventListener("click", async () => {
+            const name = document.getElementById("modalNameInput").value.trim();
+            const email = document.getElementById("modalEmailInput").value.trim();
+            const phone = document.getElementById("modalPhoneInput").value.trim();
 
-                const customerName = document.getElementById("modalNameInput").value.trim();
-                const customerEmail = document.getElementById("modalEmailInput").value.trim();
-                const customerPhone = document.getElementById("modalPhoneInput").value.trim();
+            if (!name || !email || !phone) {
+                alert(currentLang === 'ar' ? "يرجى ملء كافة البيانات" : "Please fill all fields");
+                return;
+            }
 
-                if (!customerName || !customerEmail || !customerPhone) {
-                    alert(currentLang === "ar" ? "برجاء ملء جميع البيانات!" : "Please fill in all fields!");
-                    return;
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = "...";
+
+            try {
+                // إرسال البيانات للسيرفر (السيرفر سيتولى الدفع وإرسال إيميل Brevo)
+                const res = await fetch("/api/checkout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        customer_name: name,
+                        customer_email: email,
+                        customer_phone: phone,
+                        package_name: selectedPackage.name,
+                        amount: selectedPackage.amount
+                    })
+                });
+
+                const data = await res.json();
+                if (data.success && data.payment_url) {
+                    window.location.href = data.payment_url;
+                } else {
+                    alert(data.error || "Error processing payment");
                 }
-
-                const { button, amount, packageName, originalText } = activePackage;
-
-                modal.style.display = "none";
-                button.innerHTML = currentLang === "ar" ? "جاري التحضير..." : "Preparing...";
-                button.style.pointerEvents = "none";
-
-                const randomOrderId = "ORD-" + Math.floor(Math.random() * 1000000);
-
-                // Send email
-                try {
-                    if (typeof emailjs !== "undefined") {
-                        await emailjs.send("service_ytib5o9", "template_kn4wvo3", {
-                            customer_name: customerName,
-                            customer_phone: customerPhone,
-                            customer_email: customerEmail,
-                            amount: amount,
-                            status: currentLang === "ar" ? "طلب جديد في انتظار الدفع" : "New order awaiting payment",
-                            order_id: randomOrderId
-                        });
-                    }
-                } catch (err) {
-                    console.error("Email send failed:", err);
-                }
-
-                // Process payment
-                try {
-                    const response = await fetch("/api/checkout", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            amount: parseInt(amount),
-                            package_name: packageName,
-                            name: customerName,
-                            email: customerEmail,
-                            phone: customerPhone
-                        })
-                    });
-                    const data = await response.json();
-
-                    if (data.success && data.payment_url) {
-                        window.location.href = data.payment_url;
-                    } else {
-                        alert(currentLang === "ar" ? "خطأ: " + (data.message || "حاول مرة أخرى") : "Error: " + (data.message || "Please try again"));
-                        button.innerHTML = originalText;
-                        button.style.pointerEvents = "auto";
-                    }
-                } catch (error) {
-                    alert(currentLang === "ar" ? "خطأ في الاتصال بالسيرفر" : "Server connection error");
-                    button.innerHTML = originalText;
-                    button.style.pointerEvents = "auto";
-                }
-            });
-        }
-    }
-
-    // ==========================================
-    // 9. Check Payment Status on Return
-    // ==========================================
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("success") === "true") {
-        const successMsg = document.getElementById("success-message");
-        if (successMsg) {
-            successMsg.style.display = "block";
-            window.history.replaceState(null, '', window.location.pathname); // مسح البارامترات من الرابط
-            setTimeout(() => { successMsg.style.display = "none"; }, 4000);
-        }
-    } else if (urlParams.get("success") === "false") {
-        const errorMsg = document.getElementById("error-message");
-        if (errorMsg) {
-            errorMsg.style.display = "block";
-            window.history.replaceState(null, '', window.location.pathname); // مسح البارامترات من الرابط
-            setTimeout(() => { errorMsg.style.display = "none"; }, 5000);
-        }
+            } catch (err) {
+                alert("Connection error");
+            } finally {
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = currentLang === 'ar' ? "تأكيد" : "Confirm";
+            }
+        });
     }
 });
