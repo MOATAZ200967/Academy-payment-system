@@ -94,65 +94,69 @@
 
   </div>
 
-  <script>
+<!-- الجزء الخاص بالـ JavaScript داخل ملف dashboard.html -->
+<script>
     const token = localStorage.getItem('auth_token');
 
-    // لو مفيش token خالص، روح صفحة اللوجن
+    // لو مفيش token، ارجع لصفحة اللوجن فوراً
     if (!token) {
-      window.location.href = 'login.html';
+        window.location.href = 'login.html';
     }
 
     async function loadDashboard() {
-      try {
-        const res = await fetch('/api/auth-dashboard', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const data = await res.json();
+        try {
+            const res = await fetch('/api/auth-dashboard', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
 
-        document.getElementById('loading').classList.add('hidden');
+            document.getElementById('loading').classList.add('hidden');
 
-        if (!data.success) {
-          // الجلسة انتهت أو مشكلة
-          localStorage.removeItem('auth_token');
-          localStorage.removeItem('auth_name');
-          localStorage.removeItem('auth_email');
-          document.getElementById('error-msg').classList.remove('hidden');
-          document.getElementById('error-text').textContent = data.error || 'حدث خطأ في تحميل البيانات';
-          return;
+            if (!data.success) {
+                handleLogout(); // لو التوكن منتهي أو غير صالح
+                return;
+            }
+
+            // عرض البيانات الأساسية
+            document.getElementById('user-name').textContent = data.name;
+            document.getElementById('welcome-name').textContent = data.name;
+            document.getElementById('welcome-email').textContent = data.email;
+            document.getElementById('content').classList.remove('hidden');
+
+            // فحص حالة الاشتراك
+            const sub = data.subscription;
+            // التحقق: هل يوجد اشتراك؟ وهل تاريخ الانتهاء أكبر من تاريخ النهاردة؟
+            const isActive = sub && sub.expiry_date && (new Date(sub.expiry_date) > new Date());
+
+            if (isActive) {
+                document.getElementById('sub-active').classList.remove('hidden');
+                document.getElementById('sub-none').classList.add('hidden');
+                
+                document.getElementById('sub-package').textContent = sub.package_name;
+                document.getElementById('sub-amount').textContent = `${sub.amount} ج.م`;
+                document.getElementById('sub-date').textContent = new Date(sub.date).toLocaleDateString('ar-EG');
+                document.getElementById('sub-orderid').textContent = sub.order_id;
+            } else {
+                document.getElementById('sub-active').classList.add('hidden');
+                document.getElementById('sub-none').classList.remove('hidden');
+            }
+
+        } catch (error) {
+            console.error("Dashboard Load Error:", error);
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error-msg').classList.remove('hidden');
+            document.getElementById('error-text').textContent = 'حدث خطأ في الاتصال بالسيرفر';
         }
-
-        // عرض الاسم والإيميل
-        document.getElementById('user-name').textContent = data.name;
-        document.getElementById('welcome-name').textContent = data.name;
-        document.getElementById('welcome-email').textContent = data.email;
-        document.getElementById('content').classList.remove('hidden');
-
-        // عرض بيانات الاشتراك
-        if (data.subscription) {
-          document.getElementById('sub-active').classList.remove('hidden');
-          document.getElementById('sub-package').textContent = data.subscription.package_name || '—';
-          document.getElementById('sub-amount').textContent = `${data.subscription.amount} ج.م` || '—';
-          document.getElementById('sub-date').textContent = data.subscription.date || '—';
-          document.getElementById('sub-orderid').textContent = data.subscription.order_id || '—';
-        } else {
-          document.getElementById('sub-none').classList.remove('hidden');
-        }
-
-      } catch {
-        document.getElementById('loading').classList.add('hidden');
-        document.getElementById('error-msg').classList.remove('hidden');
-        document.getElementById('error-text').textContent = 'فيه مشكلة في الاتصال، حاول تاني';
-      }
     }
 
     function handleLogout() {
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('auth_name');
-      localStorage.removeItem('auth_email');
-      window.location.href = 'login.html';
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_name');
+        localStorage.removeItem('auth_email');
+        window.location.href = 'login.html';
     }
 
     loadDashboard();
-  </script>
+</script>
 </body>
 </html>
