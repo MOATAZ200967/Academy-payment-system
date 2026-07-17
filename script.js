@@ -565,11 +565,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("success") === "true") {
         const successMsg = document.getElementById("success-message");
-        if (successMsg) successMsg.style.display = "block";
-        setTimeout(() => { window.location.href = "index.html"; }, 3000);
+        if (successMsg) {
+            successMsg.style.display = "block";
+            window.history.replaceState(null, '', window.location.pathname); // مسح البارامترات من الرابط
+            setTimeout(() => { successMsg.style.display = "none"; }, 4000);
+        }
     } else if (urlParams.get("success") === "false") {
         const errorMsg = document.getElementById("error-message");
-        if (errorMsg) errorMsg.style.display = "block";
-        setTimeout(() => { window.location.href = "index.html"; }, 4000);
+        if (errorMsg) {
+            errorMsg.style.display = "block";
+            window.history.replaceState(null, '', window.location.pathname); // مسح البارامترات من الرابط
+            setTimeout(() => { errorMsg.style.display = "none"; }, 5000);
+        }
     }
-});
+
