@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed' });
 
   try {
-    const { amount, package_name, name, email, phone } = req.body;
+    const { amount, package_name, customer_name: name, customer_email: email, customer_phone: phone } = req.body;
     const amountInCents = amount * 100;
 
     const authResponse = await fetch('https://accept.paymob.com/api/auth/tokens', {
