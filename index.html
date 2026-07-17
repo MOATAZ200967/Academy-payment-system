@@ -197,42 +197,7 @@
         </div>
     </div>
 
-    <!-- استدعاء ملف الجافا سكريبت الأساسي -->
+    <!-- استدعاء ملف الجافا سكريبت الأساسي (كل منطق الـ nav bar والـ auth موجود جواه) -->
     <script src="script.js"></script>
-
-    <script>
-        /* المنطق البرمجي الخاص بالـ UI فقط */
-        document.addEventListener("DOMContentLoaded", () => {
-            const hamburgerBtn = document.getElementById("hamburger-btn");
-            const navLinks = document.getElementById("nav-links");
-            const navOverlay = document.getElementById("nav-overlay");
-
-            function toggleMenu() {
-                hamburgerBtn.classList.toggle("active");
-                navLinks.classList.toggle("active");
-                navOverlay.classList.toggle("active");
-                const isOpen = navLinks.classList.contains("active");
-                document.body.style.overflow = isOpen ? "hidden" : "";
-            }
-
-            if (hamburgerBtn) hamburgerBtn.addEventListener("click", toggleMenu);
-            if (navOverlay) navOverlay.addEventListener("click", toggleMenu);
-            
-            navLinks.querySelectorAll("a").forEach(link => {
-                link.addEventListener("click", () => {
-                    if(navLinks.classList.contains("active")) toggleMenu();
-                });
-            });
-
-            // تحديث حالة تسجيل الدخول في الـ Navbar
-            const token = localStorage.getItem('auth_token');
-            const name  = localStorage.getItem('auth_name');
-            const authBtn = document.getElementById('nav-auth-btn');
-            if (authBtn && token && name) {
-                authBtn.textContent = '👤 ' + name;
-                authBtn.href = 'dashboard.html';
-            }
-        });
-    </script>
 </body>
 </html>
