@@ -128,9 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "td-r7-v4": "3500 جنيه (6 شهور)",
             "td-r7-v5": "6000 جنيه (سنة - خصم 40%)",
             "faq-title": "الأسئلة الشائعة (FAQ)",
-            "contact-title": "تواصل معنا"
-            // داخل قسم ar:
-            "nav-auth-login": "👤 تسجيل الدخول",
+            "contact-title": "تواصل معنا",
+            "nav-auth-login": "👤 تسجيل الدخول"
         },
         en: {
             "nav-home": "Home",
@@ -257,9 +256,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "td-r7-v4": "3500 EGP (6 months)",
             "td-r7-v5": "6000 EGP (Year - 40% off)",
             "faq-title": "Frequently Asked Questions (FAQ)",
-            "contact-title": "Contact Us"
-    // داخل قسم en:
-            "nav-auth-login": "👤 Login",
+            "contact-title": "Contact Us",
+            "nav-auth-login": "👤 Login"
         }
     };
 
@@ -406,13 +404,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Auto-play every 5 seconds
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % slides.length;
+        // Auto-play every 5 seconds (تحديث آمن للشرائح)
+        if (slides.length > 0) {
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlider();
+            }, 5000);
             updateSlider();
-        }, 5000);
-
-        updateSlider();
+        }
     }
 
     setupSlider("coach-slider", "coach-slide", "coach-dot");
@@ -578,4 +577,4 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => { errorMsg.style.display = "none"; }, 5000);
         }
     }
-
+});
