@@ -381,23 +381,27 @@
     </div>
 </div>
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="script.js"></script>
 
     <script src="script.js"></script>
-    <script>
-        // تحديث زرار الـ navbar حسب حالة تسجيل الدخول
-        (function() {
-            const token = localStorage.getItem('auth_token');
-            const name  = localStorage.getItem('auth_name');
-            const btn   = document.getElementById('nav-auth-btn');
-            if (!btn) return;
-            if (token && name) {
-                btn.textContent = '👤 ' + name;
-                btn.href = 'dashboard.html';
-            } else {
-                btn.textContent = '👤 تسجيل الدخول';
-                btn.href = 'login.html';
-            }
-        })();
-    </script>
+<script>
+    (function() {
+        const token = localStorage.getItem('auth_token');
+        const name  = localStorage.getItem('auth_name');
+        const btn   = document.getElementById('nav-auth-btn');
+        if (!btn) return;
+        if (token && name) {
+            btn.textContent = '👤 ' + name;
+            btn.href = 'dashboard.html';
+            btn.removeAttribute('data-i18n'); // إزالة الترجمة إذا كان هناك اسم
+        } else {
+            btn.textContent = '👤 تسجيل الدخول';
+            btn.href = 'login.html';
+            btn.setAttribute('data-i18n', 'nav-auth-login'); // إضافة كود الترجمة
+        }
+    })();
+</script>
+
 </body>
 </html>
